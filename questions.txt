@@ -1,0 +1,38 @@
+1.
+Suppose you need to create a BufferedReader to read from a standard byte stream. Which code excerpts in blanks _1_ and _2_ in the given code fragment will make this possible?
+Reader reader = new _1_ (new _2_(System.in));
+BufferedReader, InputStreamReader
+A standard byte stream is packed into the InputStreamReader stream, which will transform a byte sequence into a char sequence. 
+Then, a buffer stream is created and connected to the InputStreamReader stream.
+
+2.
+Which of the following methods cleans up a stream and forces data to be written out to the receiver? 
+flush()
+The flush() method flushes the output stream and forces any buffered output bytes to be written out.
+
+3.
+Which of the following classes should be used to read one character from a stream? 
+__________ in = System.in;
+int result = in.read();
+InputStream
+The field "in" of the System class is an object of the InputStream type. The method read() is used to read the next byte from the stream.
+
+4.
+Which of the following classes are byte streams?
+InputStream
+OutputStream
+Reader and Writer are abstract classes that define a low-level interface for all char streams of data reading and writing. 
+The BufferedReader, as a subclass of the Reader class, reads strings of symbols. 
+InputStream and OutputStream are abstract classes that define a low-level interface for all byte streams of data reading and writing.
+
+5.
+Which statement should be inserted instead of line 1 in the fragment of code below so that a variable number is read from the console?
+BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
+System.out.print("Enter number: ");
+// line 1
+int number = Integer.valueOf(reader.readLine());
+The reader.read() method will read a single char from a console. The final value of the variable number will be the ASCII code of the first digit from the console input. 
+The BufferedReader does not have the nextInt() method. So, reader.nextInt() is not compilable. The String class does not have the parseInt() method. 
+So, String.parseInt() is not compilable.
+
+
