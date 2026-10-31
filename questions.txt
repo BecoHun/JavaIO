@@ -35,4 +35,55 @@ The reader.read() method will read a single char from a console. The final value
 The BufferedReader does not have the nextInt() method. So, reader.nextInt() is not compilable. The String class does not have the parseInt() method. 
 So, String.parseInt() is not compilable.
 
+6.
+Which of the following statements is correct?
+The class BufferedReader can be wrapped around a FileReader for efficient reading.
+To read from a file, a stream of the FileReader type must be created and can be buffered by the class BufferedReader.
+
+7.
+Which of the following statements about the lines of code below is correct?
+BufferedWriter b1 = new BufferedWriter(new File("data.txt")); // 1
+BufferedWriter b2 = new BufferedWriter(new FileWriter("data.txt")); // 2
+BufferedWriter b3 = new BufferedWriter(new PrintWriter("data.txt")); // 3
+BufferedWriter b4 = new BufferedWriter(new BufferedWriter(b3)); // 4
+Compilation fails in line 1.
+A compilation error will be generated in the row BufferedWriter b1 = new BufferedWriter(new File("data.txt")); because the BufferedWriter constructor requires a java.io.Writer instance. All the other rows are compilable.
+
+8.
+Which code fragment will correctly read a line from a file?
+BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+//1
+String str;
+while ((str = br.readLine()) != null)
+    System.out.println(str);
+
+//2
+while ((String str = br.readLine()) != null)
+    System.out.println(str);
+
+//3
+String str;
+while (str = br.readLine() != null)
+    System.out.println(str);
+
+//4
+while (String str = br.readLine() != null)
+    System.out.println(str);
+//1
+To read from a file, a stream of the FileReader type has been created and buffered. 
+The contents of the file can be read in a loop with the readLine() method, which reads the char sequence from the current position in the file until it gets to a newline character. 
+At the end of the file, the method readLine() returns null. The String str variable must be defined before using the readline() method of the BufferedReader instance.
+
+9.
+How many bytes will be read from the file init.txt if it contains the string "0987654321"?
+BufferedInputStream input =
+        new BufferedInputStream(
+                 new FileInputStream("init.txt"));
+byte[] buf = new byte[4];
+int i = input.read(buf);
+4
+When reading from a stream using the read() method, the buf array is filled with the data from the file. 
+If all the data left does not fit in the array, the array is filled to the end; otherwise, it is filled with the actual amount of data. 
+There are ten chars in the source file and a limit of four chars from the buf array. The method read(buf) is used only once. This is why only four chars will be read from the source file.
+
 
