@@ -86,4 +86,48 @@ When reading from a stream using the read() method, the buf array is filled with
 If all the data left does not fit in the array, the array is filled to the end; otherwise, it is filled with the actual amount of data. 
 There are ten chars in the source file and a limit of four chars from the buf array. The method read(buf) is used only once. This is why only four chars will be read from the source file.
 
+10.
+What is the result of compiling and running the following code if the file data.txt does exist?
+try {
+    BufferedReader reader = new BufferedReader(new FileReader("data.txt")); // line1
+    String line = reader.readLine(); // line 2
+    System.out.println(line);
+} catch (FileNotFoundException e) { // line 3
+    e.printStackTrace();
+} finally {
+    reader.close(); // line 4
+} 
+Compilation fails on line 2.
+Compilation fails on line 4.
+Compilation fails on line 2 because the readLine() method can generate an unhandled java.io.IOException exception. 
+Also, compilation fails on line 4 because the reader defines into the try block, which is outside the scope of the finally block.
+
+11.
+Which block declarations of the try-with-resources statement are correct?
+//1
+try (FileInputStream input = new FileInputStream("file.txt")) {
+    int i = input.read();
+} catch (IOException e) {}
+
+//2
+FileInputStream input;
+try (input = new FileInputStream("data/file.txt")) {
+    int i = input.read();
+} catch (IOException e) {}
+
+//3
+try {FileInputStream input = new FileInputStream("data/file.txt")} {
+    int i = input.read();
+} catch (IOException e) {}
+
+//4
+try (FileInputStream input = new FileInputStream("data/file.txt")) {
+    int i = input.read();
+} finally {}
+//1
+//4
+That's right! Resources' declaration statements appear in parentheses immediately after the keyword try. 
+Because the instance is declared in a try-with-resource statement, it will be closed regardless of whether the try statement is completed normally or abruptly. 
+A try-with-resources statement can have catch and finally blocks, just like an ordinary try statement. In a try-with-resources statement, any catch or finally block is run after the declared resources have been closed.
+
 
