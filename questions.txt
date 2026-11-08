@@ -130,4 +130,57 @@ That's right! Resources' declaration statements appear in parentheses immediatel
 Because the instance is declared in a try-with-resource statement, it will be closed regardless of whether the try statement is completed normally or abruptly. 
 A try-with-resources statement can have catch and finally blocks, just like an ordinary try statement. In a try-with-resources statement, any catch or finally block is run after the declared resources have been closed.
 
+12.
+What will be the result of executing the following code? 
+try (DataOutputStream out = new DataOutputStream(
+        new BufferedOutputStream(
+                new FileOutputStream("data/example.dat")))) {
+    out.writeInt(123);
+    out.writeDouble(-0.55);
+    out.flush();
+} catch (IOException e) {
+    System.err.println(e.getMessage());
+}
+
+try (DataInputStream in = new DataInputStream(
+        new BufferedInputStream(
+                new FileInputStream("data/example.dat")))) {
+    double d = in.readDouble();
+    int i = in.readInt();
+    System.out.println(i + " " + d);
+} catch (IOException e) {
+    System.err.println(e.getMessage());
+}
+The output will be "-1717986918 2.625959948074E-312".
+In this case of using the DataOutputStream instance, the values of primitive data types are written to the file: four bytes of the int type and then eight bytes of the double type. 
+After that, using the DataInputStream instance, the first eight bytes are read from the file to the variable d of the double type, and 4 bytes to the variable i of the int type. 
+The code is compiled and works correctly, but the values in the console are mixed up.
+
+13.
+What will be the result of executing the following code?
+try (ObjectOutputStream output = new ObjectOutputStream(
+        new FileOutputStream("data/example.ser"))) {
+    output.writeObject(Integer.valueOf(123));
+    output.writeObject(Float.valueOf(-0.55f));
+} catch (FileNotFoundException e) {
+    System.err.println("File not found!");
+} catch (IOException e) {
+    System.err.println(e.getMessage());
+}
+
+try (ObjectInputStream input = new ObjectInputStream(
+        new FileInputStream("data/example.ser"))) {
+    Float f = (Float) input.readObject();
+    Integer i = (Integer) input.readObject();
+    System.out.println(i + " " + f);
+} catch (IOException e) {
+    System.err.println(e.getMessage());
+} catch (ClassNotFoundException e) {
+    System.err.println(e.getMessage());
+}
+An exception will be thrown at runtime.
+In this case, the ObjectOutputStream instance is used to write the Integer and Float objects into a file. 
+Then, the ObjectInputStream instance is used to read the data from the file, but the order of reading has been changed, 
+so it will throw a runtime exception with the message "…the class java.lang.Integer cannot be cast to the class java.lang.Float…".
+
 
