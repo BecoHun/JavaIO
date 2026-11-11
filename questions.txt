@@ -183,4 +183,9 @@ In this case, the ObjectOutputStream instance is used to write the Integer and F
 Then, the ObjectInputStream instance is used to read the data from the file, but the order of reading has been changed, 
 so it will throw a runtime exception with the message "…the class java.lang.Integer cannot be cast to the class java.lang.Float…".
 
+14.
+Which of the following statements creates a scanner that reads from the standard input?
+Scanner sc = new Scanner(System.in);
+To create a reading stream, you need to create an object of the Scanner class and give the source to the constructor.
+
 
