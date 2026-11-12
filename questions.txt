@@ -188,4 +188,23 @@ Which of the following statements creates a scanner that reads from the standard
 Scanner sc = new Scanner(System.in);
 To create a reading stream, you need to create an object of the Scanner class and give the source to the constructor.
 
+15.
+Which of the strings below can replace //line 1 so that the output is "HELLO12"?
+String s = "hello12";
+Formatter formatter = new Formatter();
+//line 1
+System.out.println(formatter);
+formatter.format("%S", s);
+formatter.format("%7S", s);
+To convert "hello12" to "HELLO12" in the console output, use the specifier "%S" (no length limit) or "%7S" (up to seven characters).
+
+16.
+What is the result of running the code fragment below?
+float f = 1.234f;
+Formatter formatter = new Formatter();
+formatter.format("%6.2f", f);
+System.out.println(formatter);
+1.23
+In this case, the specifier "%6.2f" means that the minimum field width is six positions; three of them are a point and two decimal places.
+
 
