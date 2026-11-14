@@ -207,4 +207,21 @@ System.out.println(formatter);
 1.23
 In this case, the specifier "%6.2f" means that the minimum field width is six positions; three of them are a point and two decimal places.
 
+17.
+Which of the operators listed below can change the root directory that contains all user directories? 
+None—the methods of the File class cannot change the root directory.
+The File class is convenient for the following: checking for existence, measuring the length of files, modifying files, and finding paths.
+
+18.
+Which of the following operations can be performed with a file on a disk using the methods of an object of the File class?
+Returning the name of the parent directory
+Deleting the file
+The File class is convenient for the following: checking for existence, measuring the length of files, modifying files, and finding paths.
+
+19.
+Which method pasted after the following code fragment will cause the file data.txt to be created in the operating system?
+File f = new File("data.txt");
+f.createNewFile();
+The method createNewFile() automatically creates a new, empty file named data.txt only if a file with this name does not yet exist.
+
 
