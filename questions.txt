@@ -224,4 +224,37 @@ File f = new File("data.txt");
 f.createNewFile();
 The method createNewFile() automatically creates a new, empty file named data.txt only if a file with this name does not yet exist.
 
+20.
+In which of the packages below is the class JarOutputStream declared?
+java.util.jar
+There are two packages in Java for working with archives—java.util.zip and java.util.jar—for processing zip and jar archives, respectively.
+
+21.
+To ensure successful archiving, what type of data must the variable buffer be if the type of out variable is JarOutputStream?
+try (FileInputStream in = new FileInputStream(file)) {
+    int len;
+    while ((len = in.read(buffer)) > 0) {
+        out.write(buffer, 0, len);
+    }
+    out.closeEntry();
+} catch (FileNotFoundException e) {
+    System.err.println(e);
+}
+byte[]
+For the read() method of the FileInputStream class and the write() method of JarOutputStream, a byte array should be the first parameter.
+
+22.
+What will be the result of compiling and running the code snippet below?
+String dir = "data_dir";
+String name = "ex_ar.jar";
+JarFile jar = new JarFile(name);
+jar.stream()
+        .forEach(e -> Paths.get(dir, e.getName())
+                .getParent()
+                .toFile()
+                .mkdirs());
+A directory with a name extracted from the file ex_ar.jar is created in a directory named data_dir.
+In this case, the content of "ex_ar.jar" will be unpacked in the directory "data_dir".
+
+
 
